@@ -1,3 +1,4 @@
+import filterData from './filter';
 
 const riskLevel = ['1','2','3','4','5','6','7','8','9','10'];
 const riskTitle = ["Risk","Bonds %","Large Cap %","Mid Cap %","Foreign %","Small Cap %"];
@@ -13,23 +14,33 @@ const riskTable = [
     { "Risk": 9, "Bonds": 5, "LargeCap": 15, "MidCap": 40, "Foreign": 25, "SmallCap": 15 }, 
     { "Risk": 10, "Bonds": 0, "LargeCap": 5, "MidCap": 25, "Foreign": 30, "SmallCap": 40 }
 ];
+let chartData = [
+  { date: "Select Level", value: 20 },
+  { date: "Select Level", value: 20 },
+  { date: "Select Level", value: 20 },
+  { date: "Select Level", value: 20 },
+  { date: "Select Level", value: 20 },
+];
 const selectedRisk = 0;
 const totalAmmount = 0;
-const initialState = { riskLevel, riskTitle, riskTable, selectedRisk, totalAmmount };
+const initialState = { riskLevel, riskTitle, riskTable, selectedRisk, totalAmmount, chartData };
 
 function reducer(state = initialState, action){
   
 switch (action.type) {
     case "SET_RISK":
       let { level } = action.payload;
+      let { riskTable } = state;
+      let chartData =  filterData(riskTable.filter(r => r.Risk == level)[0]);
       return {
-        ...state, selectedRisk: level
+        ...state, chartData, selectedRisk: level
       };
     case "SET_AMOUNT":
       let { totalAmmount } = action.payload;
       return {
         ...state, totalAmmount
       };
+    
     default:
       return state;
   }

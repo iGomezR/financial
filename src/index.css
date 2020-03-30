@@ -41,9 +41,6 @@ input:disabled{
   padding-left: 5px;
 }
 
-li {
-  list-style: none;
-}
 
 header {
   display: flex;
@@ -57,7 +54,6 @@ header {
 }
 
 svg#donut-chart {
-  display: none;
   padding-top: 25px;
   padding-left: 85px;
 }
@@ -68,7 +64,7 @@ text.inner-circle {
   text-transform: uppercase;
 }
 
-#app-title {
+.app-title {
   font-size: 55px;
   display: flex;
   justify-content: center;
@@ -77,19 +73,14 @@ text.inner-circle {
   font-family: "Roboto", sans-serif;
 }
 
-#content {
-  display: inherit;
-  justify-content: center;
-  flex-direction: column;
-}
 
-#continue {
+.continue {
   margin-left: 5px;
   margin-top: 5px;
   opacity: 0.4;
 }
 
-#currentInvestmentContainer{
+.currentInvestmentContainer{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -100,29 +91,26 @@ text.inner-circle {
   margin-right: 10px;
 }
 
-#graphic {
+.graphic {
+  padding-top: 30px;
   position: relative;
   display: flex;
   width: 720px;
 }
 
-#jsGrid {
-  margin-top: 20px;
-}
-
-#rebalance-button{
+.rebalance-button{
   height: 40px;
   opacity: 0.4;
 }
 
-#risk-selector {
+.risk-selector {
   display: inherit;
   height: 60px;
   width: 620px;
   align-self: center;
 }
 
-#risk-selector li {
+.risk-selector li {
   background-color: white;
   display: flex;
   justify-content: center;
@@ -138,27 +126,27 @@ text.inner-circle {
   cursor: pointer;
 }
 
-#risk-selector li:hover{
+.risk-selector li:hover{
   background-color: #e6ff3f;
 }
 
-#risk-selector ul {
+.risk-selector ul {
   display: inherit;
   width: 620px;
 }
 
-#risk-selector-container {
+.risk-selector-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
-#risk-selector-button-container {
+.risk-selector-button-container {
   display: flex;
 }
 
-#top-logo {
+.top-logo {
   position: absolute;
   left: 0px;
   width: 52px;
@@ -167,13 +155,13 @@ text.inner-circle {
   cursor: pointer;
 }
 
-#view-logo {
+.view-logo {
   top: 20px;
   right: -50px;
   position: absolute;
 }
 
-#view-logo img{
+.view-logo img{
   height: 50px;
   width: 55px;
   border: 3px solid black;
@@ -209,10 +197,6 @@ text.inner-circle {
   font-weight: 600;
   background-color: #73d0ff;
   cursor: pointer;
-}
-
-.jsgrid-grid-body{
-  overflow: hidden !important;
 }
 
 .react-root {
@@ -296,7 +280,6 @@ text.inner-circle {
 }
 
 .risk-calculator-transfers{
-  /* position: absolute; */
   right: 10px;
   top: 5px;
   height: 179px !important;
@@ -305,6 +288,7 @@ text.inner-circle {
   border-radius: 5px;
   padding: 5px;
   font-size: 14px;
+  text-align: left;
 }
 
 .risk-calculator-transfers div{
@@ -373,30 +357,33 @@ text.inner-circle {
   }
 }
 
-#customers {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-#customers td, #customers th {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
-}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #f9f9f9;
-}
-
-.table-container {
-  position: relative;
-  height: 386px;
-  width: 700px;
-  padding: 10px;
-}
-
 .row-hover {
   background: rgb(230, 255, 63);
+}
+
+.customers {
+  position: relative;
+  border-collapse: collapse;
+
+}
+
+.principal-size {
+  width: 94%;
+  background: white;
+}
+
+.customers td, .customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.customers td {
+
+  text-align: left;
+  background-color: white;
+}
+
+.risk-size {
+  background: white;
+  width: 700px;
 }

@@ -18,3 +18,10 @@ export const setTotalAmmount = (totalAmmount) => {
     }
      
 };
+
+export const getChartData = () => {
+    return {
+        type: 'SET_CHART_DATA'
+    }
+     
+};

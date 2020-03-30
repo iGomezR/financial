@@ -10,24 +10,24 @@ export const Table = (props) => {
         tableValue = riskTable.map(risk => {
             return(
                 <tr key={`risk-${risk.Risk}`} className={selectedRisk == risk.Risk ? 'row-hover': 'li-unselected'}>
-                    <td>{risk.Risk}</td>
-                    <td>{risk.Bonds}</td>
-                    <td>{risk.LargeCap}</td>
-                    <td>{risk.MidCap}</td>
-                    <td>{risk.Foreign}</td>
-                    <td>{risk.SmallCap}</td>
+                    <th>{risk.Risk}</th>
+                    <th>{risk.Bonds}</th>
+                    <th>{risk.LargeCap}</th>
+                    <th>{risk.MidCap}</th>
+                    <th>{risk.Foreign}</th>
+                    <th>{risk.SmallCap}</th>
                 </tr>
             );
         });
     }
     
     return(
-        <table id="customers">
-            <tbody>
+        <table className="customers principal-size">
+            <thead>
                 <tr>
                 {labels}
                 </tr>
-            </tbody>
+            </thead>
             <tbody>
                 {tableValue}
             </tbody>

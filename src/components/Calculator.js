@@ -28,6 +28,7 @@ function Calculator() {
   const ForeignNewAmount = useRef(null);
   const SmallCapNewAmount = useRef(null);
 
+  const riskCalculatorTransfers = useRef(null);
   const focusInputs = () => {
     if (
       BondsAmount.current.value &&
@@ -60,6 +61,10 @@ function Calculator() {
     ForeignDiff.current.value =  ForeignAmount.current.value - ForeignNewAmount.current.value;
     SmallCapDiff.current.value = SmallCapAmount.current.value - SmallCapNewAmount.current.value;
     
+    riskCalculatorTransfers.current.value = ' * Work in progress';
+
+    console.log(riskCalculatorTransfers.current);
+
     BondsDiff.current.style.color = parseInt(BondsDiff.current.value) < 0 ? 'red': 'green'; 
     LargeCapDiff.current.style.color = parseInt(LargeCapDiff.current.value) < 0 ? 'red': 'green'; 
     MidCapDiff.current.style.color = parseInt(MidCapDiff.current.value) < 0 ? 'red': 'green';
@@ -78,7 +83,7 @@ function Calculator() {
   if (riskTitle && riskTable) {
     labels = riskTitle.map(label => {
       if (label !== SKIP_LABEL) {
-        return <td key={label.trim()}>{label.replace("%", "")}</td>;
+        return <th key={label.trim()}>{label.replace("%", "")}</th>;
       }
     });
 
@@ -87,50 +92,49 @@ function Calculator() {
       .map(risk => {
         return (
           <tr key={`risk-${risk.Risk}`}>
-            <td>{risk.Bonds}%</td>
-            <td>{risk.LargeCap}%</td>
-            <td>{risk.MidCap}%</td>
-            <td>{risk.Foreign}%</td>
-            <td>{risk.SmallCap}%</td>
+            <th>{risk.Bonds}%</th>
+            <th>{risk.LargeCap}%</th>
+            <th>{risk.MidCap}%</th>
+            <th>{risk.Foreign}%</th>
+            <th>{risk.SmallCap}%</th>
           </tr>
         );
       });
   }
   return (
-    <div id="risk-selector-container">
+    <div className="risk-selector-container">
       <div className="risk-calculator-label">Personalized Portfolio</div>
       <div className="risk-calculator-label-container">
         <div className="risk-calculator-label-risk">Risk Level {selectedRisk}</div>
       </div>
-      <div id="customRiskTable" className="jsgrid">
-        <table id="customers">
-          <tbody>
+      <div>
+        <table className="customers risk-size">
+          <thead>
             <tr>{labels}</tr>
-          </tbody>
+          </thead>
           <tbody>{tableValue}</tbody>
         </table>
       </div>
-      <div id="currentInvestmentContainer">
+      <div className="currentInvestmentContainer">
         Please Enter Your Current Portfolio
         <button
-          id="rebalance-button"
           style={totalAmmount !== 0?  {opacity: 1}: {}}
-          className="button"
+          className="button rebalance-button"
           type="button"
           onClick={rebalance}
           disabled = { totalAmmount === 0 ? 'disabled': null}
         > Rebalance </button>
       </div>
       <div className="risk-calculator-input-container">
-        <table id="customers">
-          <tbody>
+        <table className="customers">
+          <thead>
             <tr>
               <td colSpan="2">Current Amount</td>
               <td>Difference</td>
               <td>New Amount</td>
               <td colSpan="2">Recommended Transfers</td>
             </tr>
-          </tbody>
+          </thead>
           <tbody>
             <tr>
               <td>Bonds</td>
@@ -161,7 +165,12 @@ function Calculator() {
                 />
               </td>
               <td rowSpan="5">
-                <div className="risk-calculator-transfers"></div>
+              <input
+                  ref={riskCalculatorTransfers}
+                  disabled="disabled"
+                  type="text"
+                  className="risk-calculator-transfers"
+                />
               </td>
             </tr>
             <tr>

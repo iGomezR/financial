@@ -28,13 +28,13 @@ return (
         <div className="risk-label">High</div>
       </div>
     </div>
-    <div id="risk-selector-button-container">
-      <div id="risk-selector">
+    <div className="risk-selector-button-container">
+      <div className="risk-selector">
         <ul className="risk-selector-ul">
           {risklabelVal}
         </ul>
       </div>
-      <div id="continue" className="button" style={selectedRisk !== 0? styleBtn: {}}>
+      <div className="continue" className="button" style={selectedRisk !== 0? styleBtn: {}}>
         <Link to="/calculator">Calculator</Link>
         
       </div>
