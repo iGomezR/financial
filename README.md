@@ -2,14 +2,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## This project was builded:
 
-Implemented functions: useState, useRef, useReducer.
-Implemented redux to handler store and share data between components.
-Implemented react route to navigate between pages.
+Implemented functions: useState, useRef, useReducer.<br />
+Implemented redux to handler store and share data between components.<br />
+Implemented react route to navigate between pages.<br />
 
-In the project directory, you can run:
 
-## Run Scripts:
 
+## In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.<br />
