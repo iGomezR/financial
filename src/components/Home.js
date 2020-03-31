@@ -8,7 +8,7 @@ import { Table } from './table/index';
 import PieHooks from './donut/pie';
 
 function Home() {
-  const { riskLevel, riskTitle, riskTable, selectedRisk, chartData } = useSelector(state => state);
+  const { riskTitle, riskTable, selectedRisk, chartData } = useSelector(state => state);
 
   const [count, setCount] = useState(false);
 
@@ -16,7 +16,7 @@ function Home() {
 
   return (
     <div className="risk-selector-container">
-      <RickInput riskLevel={riskLevel}/>
+      <RickInput />
       <div className={'graphic'}>
         { toShow }
       <button  className="view-logo" onClick={() => setCount(!count)}>

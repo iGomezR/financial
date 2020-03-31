@@ -5,6 +5,7 @@ import { setTotalAmmount } from "../action";
 
 function Calculator() {
   const { riskTitle, riskTable, selectedRisk, totalAmmount } = useSelector(state => state);
+  console.log({totalAmmount, selectedRisk});
   const dispatch = useDispatch();
   const SKIP_LABEL = "Risk";
   let labels;
@@ -29,23 +30,32 @@ function Calculator() {
   const SmallCapNewAmount = useRef(null);
 
   const riskCalculatorTransfers = useRef(null);
-  const focusInputs = () => {
-    if (
-      BondsAmount.current.value &&
-      LargeCapAmount.current.value &&
-      MidCapAmount.current.value &&
-      ForeignAmount.current.value &&
-      SmallCapAmount.current.value
-    ) {
-      let total =
-        parseInt(BondsAmount.current.value) +
-        parseInt(LargeCapAmount.current.value) +
-        parseInt(MidCapAmount.current.value) +
-        parseInt(ForeignAmount.current.value) +
-        parseInt(SmallCapAmount.current.value);
-        dispatch(setTotalAmmount(total));
+
+  const focusInputs = (reference) => {
+      let Bonds = parseInt(BondsAmount.current.value);
+      let LargeCap = parseInt(LargeCapAmount.current.value);
+      let MidCap = parseInt(MidCapAmount.current.value);
+      let Foreign = parseInt(ForeignAmount.current.value);
+      let SmallCap = parseInt(SmallCapAmount.current.value);
+    if(parseInt(reference.current.value) < 0){
+      reference.current.style.borderColor = 'red';
+      riskCalculatorTransfers.current.style.color = 'red';
+      riskCalculatorTransfers.current.value = 'Please use only positive digits <br> or zero when entering current amounts. <br>Please enter all inputs correctly.';
+      dispatch(setTotalAmmount(0));
+    } else {
+      reference.current.style.borderColor = 'black';
+    }
+    
+    if (selectedRisk> 0 && Bonds  >= 0 & LargeCap >= 0 && MidCap >= 0 && Foreign >= 0 && SmallCap >= 0) {
+      let total = Bonds+LargeCap+MidCap+Foreign+ SmallCap;
+      setValidInput();
+      dispatch(setTotalAmmount(total));
     }
   };
+
+  const setValidInput = () => {
+    riskCalculatorTransfers.current.value = '';
+  }
 
   const rebalance = () => {
     const percents = riskTable.filter(r => r.Risk == selectedRisk)[0];
@@ -62,8 +72,6 @@ function Calculator() {
     SmallCapDiff.current.value = SmallCapAmount.current.value - SmallCapNewAmount.current.value;
     
     riskCalculatorTransfers.current.value = ' * Work in progress';
-
-    console.log(riskCalculatorTransfers.current);
 
     BondsDiff.current.style.color = parseInt(BondsDiff.current.value) < 0 ? 'red': 'green'; 
     LargeCapDiff.current.style.color = parseInt(LargeCapDiff.current.value) < 0 ? 'red': 'green'; 
@@ -118,11 +126,11 @@ function Calculator() {
       <div className="currentInvestmentContainer">
         Please Enter Your Current Portfolio
         <button
-          style={totalAmmount !== 0?  {opacity: 1}: {}}
+          style={totalAmmount !== 0 && selectedRisk !== 0?  {opacity: 1}: {}}
           className="button rebalance-button"
           type="button"
           onClick={rebalance}
-          disabled = { totalAmmount === 0 ? 'disabled': null}
+          disabled = { totalAmmount === 0 && selectedRisk !== 0 ? 'disabled': null}
         > Rebalance </button>
       </div>
       <div className="risk-calculator-input-container">
@@ -141,7 +149,7 @@ function Calculator() {
               <td>
                 <input
                   ref={BondsAmount}
-                  onBlur={() => focusInputs()}
+                  onBlur={() => focusInputs(BondsAmount)}
                   type="text"
                   className="risk-calculator-main-input"
                 />
@@ -178,7 +186,7 @@ function Calculator() {
               <td>
                 <input
                   ref={LargeCapAmount}
-                  onBlur={() => focusInputs()}
+                  onBlur={() => focusInputs(LargeCapAmount)}
                   type="text"
                   className="risk-calculator-main-input"
                 />
@@ -207,7 +215,7 @@ function Calculator() {
               <td>
                 <input
                   ref={MidCapAmount}
-                  onBlur={() => focusInputs()}
+                  onBlur={() => focusInputs(MidCapAmount)}
                   type="text"
                   className="risk-calculator-main-input"
                 />
@@ -236,7 +244,7 @@ function Calculator() {
               <td>
                 <input
                   ref={ForeignAmount}
-                  onBlur={() => focusInputs()}
+                  onBlur={() => focusInputs(ForeignAmount)}
                   type="text"
                   className="risk-calculator-main-input"
                 />
@@ -265,7 +273,7 @@ function Calculator() {
               <td>
                 <input
                   ref={SmallCapAmount}
-                  onBlur={() => focusInputs()}
+                  onBlur={() => focusInputs(SmallCapAmount)}
                   type="text"
                   className="risk-calculator-main-input"
                 />

@@ -7,12 +7,12 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import {setRiskSelection } from '../../action/index';
 
-export const RickInput = (props) => {
-  const { selectedRisk } = useSelector(state => state);
+export const RickInput = () => {
+  const { selectedRisk, riskLevel } = useSelector(state => state);
   const styleBtn = {opacity: 1};
   const dispatch = useDispatch();
 
-  let risklabelVal = props.riskLevel.map(level => {
+  let risklabelVal = riskLevel.map(level => {
     let style = {backgroundColor: '#e6ff3f'};
     return (<li key={`li-${level}`} onClick={()=> dispatch(setRiskSelection(level))} style={selectedRisk === level ? style: {}}>{level}</li>);
   });
