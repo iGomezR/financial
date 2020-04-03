@@ -89,6 +89,7 @@ text.inner-circle {
   margin-top: 20px;
   margin-left: 10px;
   margin-right: 10px;
+  width: 700px;
 }
 
 .graphic {
@@ -247,6 +248,7 @@ text.inner-circle {
 }
 .risk-calculator-label-container{
   margin: 10px;
+  width: 700px;
 }
 .risk-calculator-label-risk{
   font-size: 22px;
